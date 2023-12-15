@@ -65,6 +65,38 @@ authrouter.post('/userlogin', async (req, res) => {
   }
 });
 
+authrouter.post('/password', async function (req, res) {
+  try {
+    
+    const {email,newpassword,confirmpassword} =req.body
+   
+    const appUser = await usermodel.findOne({ email: email });
+
+    if(appUser.email === email){
+      if (newpassword === confirmpassword) {
+
+        const hashedpassword = await bcrypt.hash(newpassword, 10)
+ 
+        appUser.password=hashedpassword;
+       
+       appUser.save()
+     
+        return res.send({ msg: 'Password changed successfully' });
+      } else {
+        return res.status(401).send({ msg: 'Passwords do not match' });
+      }
+    }else{
+      return res.status(401).send({ msg: 'user not found' });
+    }
+ 
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({ msg: 'Error occurred while changing password' });
+  }
+
+
+});
+
 
 
 

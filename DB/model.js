@@ -17,6 +17,12 @@ const  userschema = new mongoose.Schema({
    password:{
     type:String,
     required:true
+   },
+   newpassword:{
+      type:String
+   },
+   confirmpassword:{
+      type:String
    }
 }
 );

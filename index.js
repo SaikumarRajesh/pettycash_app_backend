@@ -8,6 +8,8 @@ import transactionRouter from "./Routes/Transection.js";
 
 import cors from "cors";
 
+import { user } from "./DB/model.js";
+
 
 const app = express();
 
@@ -24,7 +26,18 @@ const PORT = process.env.PORT || 7070
 app.use("/user",authrouter)
 app.use("/userTransection",transactionRouter)
 
-app.get(app.use("/user",authrouter))
+app.get('/',  async(req,res)=>{
+    try{
+       res.send(await user.find());
+       
+    }
+    catch(err){
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+    } 
+  });
+  
+  
 
 app.listen(PORT, () => {
     console.log(`Application Started on port ${PORT}`);

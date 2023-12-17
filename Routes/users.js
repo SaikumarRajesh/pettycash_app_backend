@@ -37,6 +37,18 @@ authrouter.post('/userregister', async (req, res) => {
   }
 });
 
+authrouter.get('/',  async(req,res)=>{
+  try{
+     res.send(await usermodel.find());
+     
+  }
+  catch(err){
+    console.log(err);
+    res.status(500).send('Internal Server Error');
+  } 
+});
+
+
 
 authrouter.post('/userlogin', async (req, res) => {
   try {

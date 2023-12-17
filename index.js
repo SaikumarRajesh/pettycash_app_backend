@@ -24,7 +24,7 @@ const PORT = process.env.PORT || 7070
 app.use("/user",authrouter)
 app.use("/userTransection",transactionRouter)
 
-app.get('/userTransection',  async(req,res)=>{
+app.get('/',  async(req,res)=>{
     try{
        res.send(await Transaction.find());
        

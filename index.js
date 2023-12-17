@@ -7,6 +7,7 @@ import authrouter from "./Routes/users.js";
 import transactionRouter from "./Routes/Transection.js";
 
 import cors from "cors";
+import { Transaction } from "./DB/model.js";
 
 const app = express();
 
@@ -22,6 +23,17 @@ const PORT = process.env.PORT || 7070
 
 app.use("/user",authrouter)
 app.use("/userTransection",transactionRouter)
+
+app.get('/userTransection',  async(req,res)=>{
+    try{
+       res.send(await Transaction.find());
+       
+    }
+    catch(err){
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+    } 
+  });
 
 
 app.listen(PORT, () => {

@@ -24,6 +24,7 @@ const PORT = process.env.PORT || 7070
 app.use("/user",authrouter)
 app.use("/userTransection",transactionRouter)
 
+app.get(app.use("/user",authrouter))
 
 app.listen(PORT, () => {
     console.log(`Application Started on port ${PORT}`);

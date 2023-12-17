@@ -26,7 +26,7 @@ app.use("/userTransection",transactionRouter)
 
 app.get('/',  async(req,res)=>{
     try{
-       res.send(await Transaction.find());
+       res.send(await usermodel.find());
        
     }
     catch(err){
